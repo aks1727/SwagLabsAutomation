@@ -1,0 +1,47 @@
+# ------------------------------
+# Maven / Java
+# ------------------------------
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.bak
+*.swp
+
+# ------------------------------
+# IntelliJ IDEA
+# ------------------------------
+.idea/
+*.iml
+*.iws
+out/
+
+# ------------------------------
+# Eclipse
+# ------------------------------
+.project
+.classpath
+.settings/
+bin/
+
+# ------------------------------
+# VS Code
+# ------------------------------
+.vscode/
+
+# ------------------------------
+# OS-specific
+# ------------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------------
+# TestNG / Cucumber
+# ------------------------------
+test-output/
+cucumber-reports/
+screenshots/  # if you save screenshots for failed tests
+reports/
