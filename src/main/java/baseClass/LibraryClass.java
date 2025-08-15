@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -94,7 +95,12 @@ public class LibraryClass {
     	String browserName = prop.getProperty("localbrowser");
 
         if (browserName.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
+        	ChromeOptions options = new ChromeOptions();
+        	options.addArguments("--headless");
+        	options.addArguments("--no-sandbox");
+        	options.addArguments("--disable-dev-shm-usage");
+
+            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         } else {
             System.out.println("Browser not supported: " + browserName);
@@ -132,6 +138,8 @@ public class LibraryClass {
     }
 
 
+  
+    
     public void waitForElementVisible(WebElement element, int timeout) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));

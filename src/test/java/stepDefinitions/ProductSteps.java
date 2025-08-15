@@ -45,6 +45,7 @@ public class ProductSteps {
         for (Map<String, String> product : products) {
             String productName = product.get("ProductName");
             productPage.addProductToCart(productName);
+     
             ExcelproductCount++;
             logger.info("Product added to cart: {}", productName);
         }
@@ -75,6 +76,7 @@ public class ProductSteps {
 
     @Then("Validate the product count of cart")
     public void validate_the_product_count_of_cart() {
+    	productPage.waitForCartCountToBe(ExcelproductCount);
         int cartProductCount = productPage.getProductCount();
         logger.info("Expected product count from Excel: {}", ExcelproductCount);
         logger.info("Actual product count in cart: {}", cartProductCount);

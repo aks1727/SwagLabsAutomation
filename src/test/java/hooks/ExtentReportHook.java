@@ -40,6 +40,7 @@ public class ExtentReportHook {
 
         if (scenario.isFailed()) {
             test.log(Status.FAIL, "Scenario failed: " + scenario.getName());
+           
 
             // Take screenshot as base64 and attach to Extent report
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);

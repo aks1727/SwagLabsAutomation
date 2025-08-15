@@ -11,7 +11,7 @@ Feature: Swag Labs Adding and Removing product from cart Feature
     Examples: 
       | UserName      | Password     | rows    |
       | standard_user | secret_sauce | 1,3,4,5 |
-      | standard_user | secret_sauce | 2,5,6   |
+      | standard_user | secret_sauce |   2,5,6 |
 
   @RemoveFromCart @SanityTest @Regression
   Scenario Outline: To Remove products from Cart
@@ -23,5 +23,5 @@ Feature: Swag Labs Adding and Removing product from cart Feature
 
     Examples: 
       | UserName      | Password     | rows    | rowToBeRemoved |
-      | standard_user | secret_sauce | 1,3,4,5 | 1,3           |
-      | standard_user | secret_sauce | 2,5,6   | 2             |
+      | standard_user | secret_sauce | 1,3,4,5 |            1,3 |
+      | standard_user | secret_sauce |   2,5,6 |              2 |

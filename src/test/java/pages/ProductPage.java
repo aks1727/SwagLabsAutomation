@@ -1,9 +1,12 @@
 package pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.ReusableFunctions;
 
@@ -119,6 +122,11 @@ public class ProductPage {
     	else {
     		return -1;
     	}
+    }
+    
+    public void waitForCartCountToBe(int expectedCount) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(driver -> getProductCount() == expectedCount);
     }
 
 }
