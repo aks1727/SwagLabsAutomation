@@ -77,9 +77,9 @@ public class ProductSteps {
 
     @Then("Validate the product count of cart")
     public void validate_the_product_count_of_cart() {
+    	LibraryClass.waitForElementVisible(productPage.productCount, 20);
+    	LibraryClass.waitForElementToBeEqual(productPage.productCount,10,ExcelproductCount);
 
-    	LibraryClass.waitForElementVisible(productPage.productCount, 5);
-    	LibraryClass.waitForElementToBeEqual(productPage.productCount,5,ExcelproductCount);
         int cartProductCount = Integer.parseInt(productPage.productCount.getText());
         logger.info("Expected product count from Excel: {}", ExcelproductCount);
         logger.info("Actual product count in cart: {}", cartProductCount);

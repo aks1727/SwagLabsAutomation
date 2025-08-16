@@ -63,6 +63,7 @@ public class ProductPage {
 	    } else {
 	        throw new IllegalArgumentException("Unknown product: " + productName);
 	    }
+    	LibraryClass.waitForElementVisible(productCount, 20);
 	}
 
 	public void removeProductFromCart(String productName) {

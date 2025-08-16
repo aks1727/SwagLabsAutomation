@@ -53,12 +53,7 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.22.1</version>
         </dependency>
-        <!--extent reports-->
-         <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>5.1.1</version>
-          </dependency>
+       
 		<dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>messages</artifactId>
