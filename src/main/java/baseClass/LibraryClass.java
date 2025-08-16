@@ -43,6 +43,11 @@ public class LibraryClass {
     public static WebDriver getDriver() {
     	return driver;
     }
+    
+    public static String getPropValue(String key) {
+    	return prop.getProperty(key);
+    }
+    
     public static WebDriver launchRemotelyOnSeleniumGrid() throws MalformedURLException {
     	DesiredCapabilities cap = new DesiredCapabilities();
     	
@@ -81,9 +86,8 @@ public class LibraryClass {
         caps.setCapability("platformName", "Windows 11");
         caps.setCapability("sauce:options", sauceOptions);
 
-        String sauceURL = "https://" + sauceUserName + ":" + sauceAccessKey +
-                          "@ondemand.saucelabs.com:443/wd/hub";
-
+        String sauceURL = "https://" + sauceUserName + ":" + sauceAccessKey +"@ondemand.eu-central-1.saucelabs.com/wd/hub";
+//        System.out.println(sauceURL);
         driver = new RemoteWebDriver(new URL(sauceURL), caps);
         return driver;
     }
@@ -92,6 +96,20 @@ public class LibraryClass {
 
 
     public static WebDriver launchLocally() {
+    	String browserName = prop.getProperty("localbrowser");
+
+        if (browserName.equalsIgnoreCase("chrome")) {
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+        } else {
+            System.out.println("Browser not supported: " + browserName);
+        }
+
+        return driver;
+    }
+    
+    
+    public static WebDriver launchForDockerEnv() {
     	String browserName = prop.getProperty("localbrowser");
 
         if (browserName.equalsIgnoreCase("chrome")) {
@@ -117,6 +135,9 @@ public class LibraryClass {
     	else if(env.equalsIgnoreCase("saucelabs")) {
     		return launchRemotelyOnSauceLabs();
     	}
+    	else if(env.equalsIgnoreCase("docker")){
+    		return launchForDockerEnv();
+    	}
     	else {
     		return launchLocally();
     	}
@@ -140,7 +161,7 @@ public class LibraryClass {
 
   
     
-    public void waitForElementVisible(WebElement element, int timeout) {
+    public static void waitForElementVisible(WebElement element, int timeout) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             wait.until(ExpectedConditions.visibilityOf(element));
@@ -171,6 +192,8 @@ public class LibraryClass {
             return false;
         }
     }
+    
+    
 
     public void closeBrowser() {
         try {
@@ -183,6 +206,12 @@ public class LibraryClass {
             log.error("Failed to close browser: " + e.getMessage(), e);
         }
     }
+
+	public static void waitForElementToBeEqual(WebElement element, int timeout, int count) {
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(timeout));
+		wait.until(driver -> Integer.parseInt(element.getText()) == count);
+				
+	}
 
     
 }

@@ -2,6 +2,8 @@ package stepDefinitions;
 
 import org.testng.Assert;
 
+import baseClass.LibraryClass;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import baseClass.LibraryClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.ProductPage;
@@ -76,8 +77,10 @@ public class ProductSteps {
 
     @Then("Validate the product count of cart")
     public void validate_the_product_count_of_cart() {
-    	productPage.waitForCartCountToBe(ExcelproductCount);
-        int cartProductCount = productPage.getProductCount();
+
+    	LibraryClass.waitForElementVisible(productPage.productCount, 5);
+    	LibraryClass.waitForElementToBeEqual(productPage.productCount,5,ExcelproductCount);
+        int cartProductCount = Integer.parseInt(productPage.productCount.getText());
         logger.info("Expected product count from Excel: {}", ExcelproductCount);
         logger.info("Actual product count in cart: {}", cartProductCount);
 
@@ -87,7 +90,7 @@ public class ProductSteps {
             logger.error("❌ Product count mismatch! Expected: {}, Found: {}", ExcelproductCount, cartProductCount);
         }
 
-        Assert.assertEquals(ExcelproductCount, cartProductCount, 
+        Assert.assertEquals(cartProductCount,ExcelproductCount , 
                 "BUG: Some products not added to cart or count mismatch");
     }
 }

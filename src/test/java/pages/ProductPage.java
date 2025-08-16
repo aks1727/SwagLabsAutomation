@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import baseClass.LibraryClass;
 import utils.ReusableFunctions;
 
 public class ProductPage {
@@ -112,21 +113,6 @@ public class ProductPage {
 
     public void sortProductsByValue(String value) {
     	rf.selectDropDownOption(sortDropDown,value);
-    }
-    
-    
-    public int getProductCount() {
-    	if(rf.isElementDisplayed(productCount)) {
-    		return Integer.parseInt(productCount.getText());
-    	}
-    	else {
-    		return -1;
-    	}
-    }
-    
-    public void waitForCartCountToBe(int expectedCount) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(driver -> getProductCount() == expectedCount);
     }
 
 }

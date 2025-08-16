@@ -1,5 +1,6 @@
 package hooks;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -32,15 +33,21 @@ public class ExtentReportHook {
      *
      * @param scenario The executed Cucumber scenario
      */
+    
     @After
     public void checkScenarioStatus(Scenario scenario) {
         WebDriver driver = LibraryClass.getDriver();  // assuming static getDriver() method
 
         test = extent.createTest(scenario.getName());
 
+        String env = LibraryClass.getPropValue("env");
         if (scenario.isFailed()) {
             test.log(Status.FAIL, "Scenario failed: " + scenario.getName());
-           
+            
+            
+            if(env.equalsIgnoreCase("saucelabs")) {
+            	 ((JavascriptExecutor) LibraryClass.driver).executeScript("sauce:job-result=failed");
+        	}
 
             // Take screenshot as base64 and attach to Extent report
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -50,6 +57,10 @@ public class ExtentReportHook {
             // Save screenshot to disk using existing utility
             LibraryClass.captureScreenshot(scenario.getName());
         } else {
+
+        	if(env.equalsIgnoreCase("saucelabs")) {
+           	 ((JavascriptExecutor) LibraryClass.driver).executeScript("sauce:job-result=passed");
+       	}
             test.log(Status.PASS, "Scenario passed: " + scenario.getName());
         }
 
