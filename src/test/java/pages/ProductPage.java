@@ -1,12 +1,9 @@
 package pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseClass.LibraryClass;
 import utils.ReusableFunctions;
@@ -82,6 +79,7 @@ public class ProductPage {
 	    } else {
 	        throw new IllegalArgumentException("Unknown product: " + productName);
 	    }
+	    LibraryClass.waitForElementVisible(productCount, 20);
 	}
 
     public boolean isProductTitleDisplayed() {

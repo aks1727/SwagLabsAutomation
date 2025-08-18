@@ -1,9 +1,5 @@
 package stepDefinitions;
 
-import org.testng.Assert;
-
-import baseClass.LibraryClass;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +9,9 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
+import baseClass.LibraryClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.ProductPage;

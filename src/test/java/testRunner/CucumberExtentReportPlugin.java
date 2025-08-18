@@ -19,6 +19,7 @@ public class CucumberExtentReportPlugin {
         if (extent == null) {
             // Create a new ExtentSparkReporter with the target report file path
             ExtentSparkReporter reporter = new ExtentSparkReporter("target/ExtentReport.html");
+            reporter.config().setOfflineMode(true);
 
             // Set the name and title of the report
             reporter.config().setReportName("Swag Labs Automation Report");
